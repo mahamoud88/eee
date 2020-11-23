@@ -1,0 +1,12 @@
+
+server: 
+  port: 3002
+
+db:
+  host: 'localhost'
+  username: 'postgres'
+  password: 'nest'
+  synchronize: true
+
+jwt:
+secret: 'topSecret51'
