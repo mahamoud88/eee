@@ -1,3 +1,4 @@
+import { GoogleStrategy } from './Google-Strategy';
 import { UserRepository } from './user.repository';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Module } from '@nestjs/common';
@@ -25,7 +26,7 @@ const jwtconfig=config.get('jwt')
 
         ],
   controllers: [AuthController],
-  providers: [AuthService,JwtStrategy],
-  exports:[JwtStrategy,PassportModule]
+  providers: [AuthService,JwtStrategy,GoogleStrategy],
+  exports:[JwtStrategy,PassportModule,GoogleStrategy]
 })
 export class AuthModule {}

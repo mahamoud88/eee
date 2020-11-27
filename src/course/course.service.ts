@@ -5,19 +5,19 @@ import { UpdateCourseDto } from './dto/update-course.dto';
 @Injectable()
 export class CourseService {
   create(createCourseDto: CreateCourseDto) {
-    return 'This action adds a new course3333';
+    return 'This actioddddn adds a new course3333';
   }
 
   findAll() {
-    return `This action returns all course333`;
+    return `This actiodddn returns all course333`;
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} course333`;
+    return `This action dddreturns a #${id} course333`;
   }
 
   update(id: number, updateCourseDto: UpdateCourseDto) {
-    return `This action updates a #${id} course333`;
+    return `This actidddon updadddtes a #${id} course333`;
   }
 
   remove(id: number) {
