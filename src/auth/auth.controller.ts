@@ -1,7 +1,7 @@
 import { User } from './user.entity';
 import { AuthCredentialsDto } from './dto/auth.credentials.dto';
 import { AuthService } from './auth.service';
-import { Body, Controller, Logger, Post, Get,Req, UseGuards, UsePipes,ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Logger, Post, Get,Req, UseGuards,HttpStatus, UsePipes,ValidationPipe } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from './get-user.decorator';
 
@@ -46,7 +46,17 @@ console.log('ssss')
     return this.authService.googleLogin(req)
   }
 
+  @Get("/facebook")
+  @UseGuards(AuthGuard("facebook"))
+  async facebookLogin(): Promise<any> {
+    return HttpStatus.OK;
+  }
 
+  @Get("/redirect2")
+  @UseGuards(AuthGuard("facebook"))
+  async facebookLoginRedirect(@Req() req)  {
+    return this.authService.facebookLogin(req);
+  }
 
    @Post('/test')
    @UseGuards(AuthGuard())
