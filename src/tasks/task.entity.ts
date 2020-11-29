@@ -20,7 +20,8 @@ export class TaskEntity  extends BaseEntity
     @Column()
     description:string;
 
-    @Column()    status:TaskStauts;
+    @Column()    
+    status:TaskStauts;
 
     @ManyToOne(type=>User ,user=>user.tasks,{eager:false}) 
     user:User

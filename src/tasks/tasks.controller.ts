@@ -12,6 +12,7 @@ import { promises } from 'dns';
 import { GetUser } from 'src/auth/get-user.decorator';
 import { GetTasksFilterDto } from './dto/get-tasks-filter.dto';
 import { Pagination } from 'nestjs-typeorm-paginate';
+import { ApiBody } from '@nestjs/swagger';
 
 @Controller('tasks')
 @UseGuards(AuthGuard())
@@ -62,7 +63,7 @@ export class TasksController {
     }
 
 
-
+@ApiBody({ type: [CreateTaskDto] })
 @Post()
 //@UsePipes(ValidationPipe)
 creatask(
