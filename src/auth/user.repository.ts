@@ -31,20 +31,24 @@ user.password=await this.hasspass(password,user.salt)
 
  //console.log(user.password)
 
-try{
-    await user.save()
-}
+            try
+            {
+                await user.save()
+                return user.username;
+            }
 
-catch(error)
-{
-if(error.code==='23505'){
-    throw new ConflictException('user name is exist')
-}
-else{
-throw new InternalServerErrorException();
-}
+            catch(error)
+             {
+                if(error.code==='23505')
+                {
+                      throw new ConflictException('user name is exist')
+                }
+                else
+                {
+                      throw new InternalServerErrorException();
+                }
 
-}
+            }
 
 
 }

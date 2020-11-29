@@ -20,7 +20,7 @@ export class AuthController {
     
  
     @Post('/singup')
-    singup(@Body(ValidationPipe) authCredentialsDto:AuthCredentialsDto):Promise<void>{
+    singup(@Body(ValidationPipe) authCredentialsDto:AuthCredentialsDto):Promise<{accessToken:string}>{
      
     return this.authService.singup(authCredentialsDto);
     }
@@ -62,6 +62,7 @@ console.log('ssss')
    @UseGuards(AuthGuard())
    test(@GetUser() user:User){
    //const dbUser = this.configService.get<EnvironmentVariables>('db2' );
+   console.log(user);
     console.log("dbUser.host");
 
  }

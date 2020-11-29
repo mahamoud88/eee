@@ -9,7 +9,7 @@ import {
 
 @Catch()
 export class HttpErrorFilter implements ExceptionFilter {
-  catch(exception: HttpException, host: ArgumentsHost) {
+  catch(exception: any, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse();
     const request = ctx.getRequest();
@@ -24,7 +24,7 @@ export class HttpErrorFilter implements ExceptionFilter {
       method: request.method,
       message:
         status !== HttpStatus.INTERNAL_SERVER_ERROR
-          ? exception || exception.message || null
+          ? exception.response.message || exception.message || null
           : 'Internal server error',
     };
 

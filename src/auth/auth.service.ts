@@ -21,9 +21,13 @@ export class AuthService {
 
         }
 
-async singup(authCredentialsDto:AuthCredentialsDto): Promise<void>{
+async singup(authCredentialsDto:AuthCredentialsDto): Promise<{accessToken:string}>{
 
- return    this.userRepository.singup(authCredentialsDto);
+ const username=await this.userRepository.singup(authCredentialsDto);
+
+const accessToken = this.gentoken(username);
+return accessToken;
+
 
 }
 
@@ -35,14 +39,23 @@ async signin(authCredentialsDto:AuthCredentialsDto):Promise<{accessToken:string}
         throw new  UnauthorizedException('invalid credentials')
     }
  
-const payload:jwtPayload={username}
-const accessToken= this.jwtService.sign(payload)
+// const payload:jwtPayload={username}
+// const accessToken= this.jwtService.sign(payload)
 
-return {accessToken};
-
+// return {accessToken};
+const accessToken = this.gentoken(username);
+return accessToken;
 
 }
 
+
+gentoken(username:string){
+
+  const payload:jwtPayload={username}
+  const accessToken= this.jwtService.sign(payload)
+  return {accessToken};
+
+}
 
 googleLogin(req: { user: any; }) {
 

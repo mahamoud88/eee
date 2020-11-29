@@ -3,6 +3,7 @@ import { Type } from 'class-transformer';
 //import { Task } from './../../dist/task.model.d';
 import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn, Unique } from 'typeorm';
 import * as bcrypt from 'bcrypt'
+import { TaskEntity } from 'src/tasks/task.entity';
 
 
 @Entity()
@@ -20,8 +21,8 @@ export class User extends BaseEntity{
     @Column()
     salt:string;
 
-// @OneToMany(type =>TaskEntity,task=>task.user,{eager:true})
-//   tasks:TaskEntity[]
+@OneToMany(type =>TaskEntity,task=>task.user,{eager:true})
+  tasks:TaskEntity[]
     
     async vlaidatepassword(password:string):Promise<boolean>{
 

@@ -8,6 +8,7 @@ import { AppService } from './app.service';
 import { typeOrmConfig } from './config/typeorm.config';
 import { APP_FILTER } from '@nestjs/core';
 import { HttpErrorFilter } from './shard/http-error.filter';
+import { TasksModule } from './tasks/tasks.module';
  
  
  
@@ -15,7 +16,7 @@ import { HttpErrorFilter } from './shard/http-error.filter';
  
 
 @Module({
- imports:[ TypeOrmModule.forRoot(typeOrmConfig), AuthModule,  ],
+ imports:[ TypeOrmModule.forRoot(typeOrmConfig), AuthModule,TasksModule  ],
   controllers: [AppController],
   providers: [
     AppService,

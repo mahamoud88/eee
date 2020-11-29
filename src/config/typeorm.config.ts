@@ -16,6 +16,7 @@ export const typeOrmConfig:TypeOrmModuleOptions={
     username: dbconfig.username,
     password: dbconfig.password,
     database: dbconfig.database,
+    //dropSchema:true, // to delete all data in all table (entity)
     entities: [__dirname+"/../**/*.entity{.ts,.js}"],
     "synchronize": dbconfig.synchronize
 
