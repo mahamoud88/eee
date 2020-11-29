@@ -9,6 +9,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 
 import { TaskEntity } from './task.entity';
 import { GetTasksFilterDto } from './dto/get-tasks-filter.dto';
+import { IPaginationOptions, Pagination,paginate } from 'nestjs-typeorm-paginate';
  
 
 @Injectable()
@@ -24,6 +25,41 @@ export class TasksService {
     }
 
  
+ 
+
+    async paginate( filterDto:GetTasksFilterDto,
+      user:User,options: IPaginationOptions): Promise<Pagination<TaskEntity>> {
+     
+     
+        const { status, search } = filterDto;
+
+        const queryBuilder = this.taskRepository.createQueryBuilder('task');
+      
+
+        queryBuilder.where('task.userId = :userId', { userId: user.id });
+    
+        if (status) {
+          queryBuilder.andWhere('task.status = :status', { status });
+        }
+    
+        if (search) {
+          queryBuilder.andWhere('(task.title LIKE :search OR task.description LIKE :search)', { search: `%${search}%` });
+        }
+     
+       
+      
+      
+      
+      
+
+      
+      queryBuilder.orderBy('task.title', 'DESC'); // Or whatever you need to do
+    
+      return paginate<TaskEntity>(queryBuilder, options);
+    }
+
+
+
 
 
     async getTasks(

@@ -11,6 +11,7 @@ import { TaskEntity } from './task.entity';
 import { promises } from 'dns';
 import { GetUser } from 'src/auth/get-user.decorator';
 import { GetTasksFilterDto } from './dto/get-tasks-filter.dto';
+import { Pagination } from 'nestjs-typeorm-paginate';
 
 @Controller('tasks')
 @UseGuards(AuthGuard())
@@ -22,6 +23,22 @@ export class TasksController {
     {
 
     }
+    @Get('/index')
+    async index(
+      @Query('page') page: number = 1,
+      @Query('limit') limit: number = 10,
+       @Query(ValidationPipe) filterDto: GetTasksFilterDto ,
+      @GetUser() user: User
+    ): Promise<Pagination<TaskEntity>> {
+      limit = limit > 100 ? 100 : limit;
+      return this.tasksService.paginate(filterDto,user,{
+        page,
+        limit,
+        route: 'http://localhost:3000/tasks/index',
+      });
+    }
+
+
 
 
     @Get()
