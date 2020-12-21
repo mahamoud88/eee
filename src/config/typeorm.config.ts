@@ -21,6 +21,4 @@ export const typeOrmConfig:TypeOrmModuleOptions={
     "synchronize": dbconfig.synchronize
 
 
-    
-
 }

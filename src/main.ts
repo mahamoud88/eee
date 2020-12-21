@@ -11,18 +11,21 @@ import { Logger } from '@nestjs/common';
  const httpconfig:configInterface=config.get('server');
 
  const port=process.env.Port||httpconfig.port;
+
+
+ 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.setGlobalPrefix('api');
+  // app.setGlobalPrefix('api');
 
-  const options = new DocumentBuilder()
-  .setTitle('api example')
-  .setDescription('The  API description')
-  .setVersion('1.0')
-  .addTag('cats')
-  .build();
-  const document = SwaggerModule.createDocument(app, options);
-  SwaggerModule.setup('api', app, document);
+  // const options = new DocumentBuilder()
+  // .setTitle('api example')
+  // .setDescription('The  API description')
+  // .setVersion('1.0')
+  // .addTag('cats')
+  // .build();
+  // const document = SwaggerModule.createDocument(app, options);
+  // SwaggerModule.setup('api', app, document);
 
   await app.listen(httpconfig.port);
   Logger.log(`the app is run under port ${port}`)
